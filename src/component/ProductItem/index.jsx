@@ -1,17 +1,21 @@
 import React from "react";
-
-export default function productItem(name) {
+import result from '../../data.json';
+var data = result.data;
+export default function ProductItem({name,img_url,shop_name,price,final_price} ) {
     return (
         <div className="col-xl-4 col-lg-6 col-md-6">
             <div className="product-wrapper mb-50">
                 <div className="product-img mb-25">
                     <a href="#">
-                        <img src="./assets/pro2.jpg" alt="" />
+                        <img src={img_url}  alt="" />
+                        {/* {result.data.map((elm, id) => <img src={elm.img_url} alt=""/> )} */}
+                        
                         <img
                             className="secondary-img"
-                            src="./assets/pro3.jpg"
+                            src={img_url}
                             alt=""
                         />
+                        {/* {result.data.map((elm, id) => <img src={elm.img_url} className="secondary-img" alt=""/> )} */}
                     </a>
                     <div className="product-action text-center">
                         <a href="#" title="Shoppingb Cart">
@@ -27,15 +31,15 @@ export default function productItem(name) {
                 </div>
                 <div className="product-content pr-0">
                     <div className="pro-cat mb-10">
-                        <a href="#">{name}</a>
+                        <a href="#">{shop_name} </a>
                     </div>
                     <h4>
-                        <a href="#">Minimal Deco Furniture</a>
+                        <a href="#"> {name}  </a>
                     </h4>
                     <div className="product-meta">
                         <div className="pro-price">
-                            <span>$119.00 USD</span>
-                            <span className="old-price">$230.00 USD</span>
+                            <span>{price} VND </span>
+                            <span className="old-price">{final_price} VND </span>
                         </div>
                     </div>
                 </div>
