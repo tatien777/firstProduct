@@ -1,10 +1,42 @@
-import React from "react";
+import React , { useState }from "react";
 // import result from './data';
 import ProductItem from '../ProductItem';
 import result from '../../data.json';
 
 
-export default function ProductList() {
+export default function ProductList(propApp) {
+  // console.log(propApp) ;
+  // const {data} =propApp.data ;
+  const sendSortData = () => {
+    
+  }
+
+  const sortAToZ= () => {
+    let sortList =  propApp.data
+    console.log('button click',sortList);
+    propApp.sortProduct(true,'name',sortList);
+  }
+
+  const sortZtoA= () => {
+    let sortList =  propApp.data
+    console.log('button click',sortList);
+    propApp.sortProduct(false,'name',sortList);
+  }
+  const sortPriceUp= () => {
+    let sortList =  propApp.data
+    console.log('button click',sortList);
+    propApp.sortProduct(true,'final_price',sortList);
+  }
+  const sortPriceDown= () => {
+    let sortList =  propApp.data
+    console.log('button click',sortList);
+    propApp.sortProduct(false,'final_price',);
+  }
+
+  const filterSale= () => {
+    let number = 50;
+    propApp.filterBigSaleProduct(propApp.data,number);
+  }
   return (
     <main>
       <section className="shop-area pt-150 pb-100">
@@ -32,8 +64,7 @@ export default function ProductList() {
                     {/* <!-- ProductItem --> */}
                     
                     
-                    {result.data.map(ele => <ProductItem name={ele.name} img_url={ele.img_url} 
-                    shop_name={ele.shop_name} price={ele.price} final_price={ele.final_price}   />)}
+                    {propApp.data.map((elm,index) => <ProductItem {...elm} key={index} {...propApp} />)}
                     
                     {/* <ProductItem/>
                     
@@ -69,16 +100,16 @@ export default function ProductList() {
                   <h3 className="shop-title">SHOP BY</h3>
                   <ul className="shop-link">
                     <li>
-                      <a href="#">Name: A-Z</a>
+                      <a onClick={sortAToZ} href="#">Name: A-Z</a>
                     </li>
                     <li>
-                      <a href="#">Name: Z-A</a>
+                      <a  onClick={sortZtoA} href="#">Name: Z-A</a>
                     </li>
                     <li>
-                      <a href="#">Price: High to Low</a>
+                      <a onClick={sortPriceDown} href="#">Price: High to Low</a>
                     </li>
                     <li>
-                      <a href="#">Price: Low to High</a>
+                      <a onClick={sortPriceUp} href="#">Price: Low to High</a>
                     </li>
                     <li>
                       <a href="#">Product: Top Sales</a>

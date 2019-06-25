@@ -1,7 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import result from '../../data.json';
-var data = result.data;
-export default function ProductItem({name,img_url,shop_name,price,final_price} ) {
+import {AppConText} from '../../App';
+
+// var data = result.data;
+
+export default function ProductItem(props) {
+    const {name,img_url,shop_name,price,final_price} = props;
+    // const {addCard} = propApp;
+    // const value = useContext(AppConText);
+    
+    // const [text, setText] = useState("Cart here");
+    // const [URL, setURL] = useState("URL here");
+    // const [thePrice, setThePrice] = useState("Price here");
+    // const [theFinalPrice, setTheFinalPrice] = useState("Final Price here");
+    
+
+    const sendCard = () => {
+        // console.log(props.addCard);
+        let text = {name};
+        let URL =  {img_url};
+        let thePrice = {price} ;
+        let theFinalPrice = {final_price};
+        props.addCart(text, URL, thePrice, theFinalPrice);
+    };
+
+
+
+    // const 
+
+
+    
     return (
         <div className="col-xl-4 col-lg-6 col-md-6">
             <div className="product-wrapper mb-50">
@@ -17,7 +45,7 @@ export default function ProductItem({name,img_url,shop_name,price,final_price} )
                         />
                         {/* {result.data.map((elm, id) => <img src={elm.img_url} className="secondary-img" alt=""/> )} */}
                     </a>
-                    <div className="product-action text-center">
+                    <div className="product-action text-center" onClick={sendCard}>
                         <a href="#" title="Shoppingb Cart">
                             <i className="fas fa-shopping-cart" />
                         </a>
