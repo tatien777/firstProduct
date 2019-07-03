@@ -5,18 +5,34 @@ import './App.css';
 import result from './data';
 import Header from './component/Header';
 import Footer from './component/Footer';
-import ProductList from './component/ProductList';
+// import ProductList from './component/ProductList';
 import Layout from './component/Layout';
-import RegisterForm from './component/RegisterForm';
-import LoginForm from './component/LoginForm';
+// import RegisterForm from './component/RegisterForm';
+// import LoginForm from './component/LoginForm';
+// import ProductDetail from './component/ProductDeatail';
+import ErrorPage from './component/ErrorPage';
+import * as firebase from 'firebase';
+import * as initFireBase from './fireBaseConfig';
 
+import { BrowserRouter as Router,Route,Switch } from 'react-router-dom';
 
+const ProductList = React.lazy(() => import("./component/ProductList"));
+const RegisterForm = React.lazy(() => import("./component/RegisterForm"));
+const LoginForm = React.lazy(() => import("./component/LoginForm"));
+const ProductDetail = React.lazy(() => import("./component/ProductDeatail"));
+
+// function App() {
+//   };
 
 const value = [1, 2, 3, 4]
 export const AppConText = React.createContext({});
 
 
 function App() {
+
+  firebase.auth().onAuthStateChanged((user) => console.log(user,'check user login'));
+  console.log(!firebase.auth().onAuthStateChange,'onAuthStateChange')
+
   const [data,setData] = useState(result.data);
   const [text,setText] = useState("Cart here");
   const [URL,setURL] = useState("URL here");
@@ -25,6 +41,7 @@ function App() {
   const [cart,setCartsArray] = useState([]);
   const [totalPrice,setTotalPrice] = useState(0);
   const [totalIcon,setTotalIcon] = useState(0);
+  
 
 
   const addCart = function(text, URL, thePrice, theFinalPrice) {
@@ -47,39 +64,77 @@ function App() {
 
 function sortProduct(isLowToHigh, property, e) {
   // e.preventDefault();
-  let resultList = data;
+  let resultList = [...data];
 
-  if (isLowToHigh) {
+  // let resultList = sortList;
+  if (property ==="number") {
     resultList.sort((a, b) => a[property] - b[property]);
-    console.log('bug1',resultList[0][property]);
+    console.log(resultList,'true');
   } else {
     if (property === "name") {
-      resultList.sort((a,b)=> 
-      a["name"].localeCompare(b["name"], "vi", { sensitivity: "base" }));
-      resultList.sort((a,b)=> 
-      b["name"].localeCompare(a["name"], "vi", { sensitivity: "base" }));
-      console.log('bug2',resultList[0][property]);
+      resultList.sort();
+      resultList.reverse();
     } else {
       resultList.sort((a, b) => b[property] - a[property]);
-      console.log('bug3',resultList[0][property]);
     }
   }
-  console.log('resultList',data);
-  return setData(resultList);
-};
+  
+    return setData([...resultList]);
+  };
 
 function filterBigSaleProduct(resultList, number) {
-  return resultList.filter(elm => elm.promotion_percent >= number);
+  let listSale = [...data]; 
+  listSale.filter(elm => elm.promotion_percent >= number);
+  
+  console.log('filter function',(listSale));
+  return setData(listSale);
+
+}
+
+const filterSale = (e) => {
+  e.preventDefault();
+  let sortedList = [];
+   sortedList = data.filter(e => e.promotion_percent >= 20);
+  setData(sortedList);
 }
 
   const onClickBtn = e => {
     console.log(e);
   };
+  const [selectItem,setSelectItems] = useState();
+  const getInfoFromDetails = (value) => {
+    // return console.log(value,'getInfoFromDetails');
+    const item = data.find(item=> item.product_id === parseInt(value,10))
+    setSelectItems(item);
+  };
 
-  let props = {data,text,URL,thePrice,theFinalPrice,cart,totalPrice,addCart,sortProduct,filterBigSaleProduct,totalIcon}
+  // $("#filterBigSale").click(function() {
+  //   let sortedList = filterBigSaleProduct([...products], 10);
+  //   render(sortedList);
+  // });
+
+  let props = {data,text,URL,thePrice,theFinalPrice,cart,totalPrice,addCart,sortProduct,filterBigSaleProduct,totalIcon,getInfoFromDetails}
+  
   return (
+    <Router> 
     <Layout {...props}>
-
+    <React.Suspense fallback={<p> Loading ....</p>}>
+    <Switch>
+    <Route path="/" exact render={() => ( <ProductList  {...props}  filterSale={filterSale}/>
+              )}
+          />
+          {/* <Route path="/details" component={ItemDetail} /> */}
+          <Route path="/register" component={RegisterForm} />
+          <Route path="/login" component={LoginForm} />
+          {/* <Route path="/detail" component={ProductDetail} /> */}
+          
+          <Route  path="/detail/:id" render={(propsOfRouter) => ( <ProductDetail {...props} {...propsOfRouter} selectItem={selectItem}   />)} />
+          
+          <Route path="/error" component={ErrorPage} />
+          
+/>
+          
+    
 
 
       {/* <!-- header start --> */}
@@ -88,7 +143,7 @@ function filterBigSaleProduct(resultList, number) {
 
       {/* <!-- ProductList start --> */}
       {/* <AppConText.Provider value={{ text, onClickBtn }}> */}
-      <ProductList data={data} {...props}/>
+      
       {/* </AppConText.Provider> */}
       {/* <RegisterForm/> */}
       {/* <LoginForm/> */}
@@ -112,7 +167,10 @@ function filterBigSaleProduct(resultList, number) {
     </div>
   </div>
   {/* <!-- end fullscreen search --> */ }
+  </Switch>
+  </React.Suspense>
     </Layout>
+  </Router>
 
   );
 }

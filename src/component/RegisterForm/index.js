@@ -1,10 +1,40 @@
-import React from 'react' ; 
+import React,{useState} from 'react' ; 
 import Layout from '../Layout'
+import firebase from 'firebase';
+import PrivateRoute from '../PrivateRouter';
+import ProductDetail from '../ProductDeatail';
 
-
-export default function RegisterForm() {
-    return (
-      
+export default function RegisterForm(props) {
+  
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [error, setError] = useState('') 
+    const onSubmit  = async (e) => {
+      e.preventDefault()
+      // console.log({ email, password })
+      try {
+        await firebase.auth().createUserWithEmailAndPassword(email, password)
+        props.history.push('/login')
+      } catch(error) {
+        // console.log(error.message, "error")
+        setError(error.message)
+      }
+  
+    }
+  
+    const onChangeEmail = (e) => {
+      setEmail(e.target.value)
+    }
+  
+    const onChangePassword = (e) => {
+      setPassword(e.target.value)
+    }
+  
+    const onLogin = () => {
+      props.history.push('/login')
+    }
+    
+  return (  
         <main>
         {/* breadcrumb-area-start */}
         <section className="breadcrumb-area" style={{backgroundImage: 'url("./assets/page-title.png")'}}>

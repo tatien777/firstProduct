@@ -1,5 +1,5 @@
 import React,{useState} from 'react' ; 
-
+import firebase from 'firebase';
 
 
 export default function LoginForm() {
@@ -8,6 +8,7 @@ const [password,setPassword] = useState('');
 const onSubmit = (e) => {
     e.preventDefault()
     console.log({email,password});
+    console.log(firebase.auth().signInWithEmailAndPassword(email, password) )
 }
 const onChangeEmail = (e) => {
     setEmail(e.target.value);

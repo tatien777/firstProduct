@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import result from '../../data.json';
 import {AppConText} from '../../App';
+import { BrowserRouter as Router, Route, Switch,Link } from 'react-router-dom';
 
 // var data = result.data;
 
@@ -34,7 +35,8 @@ export default function ProductItem(props) {
         <div className="col-xl-4 col-lg-6 col-md-6">
             <div className="product-wrapper mb-50">
                 <div className="product-img mb-25">
-                    <a href="#">
+                    {/* <a href="#"> */}
+                    <Link to={`/detail/${props.product_id}`}> 
                         <img src={img_url}  alt="" />
                         {/* {result.data.map((elm, id) => <img src={elm.img_url} alt=""/> )} */}
                         
@@ -44,14 +46,16 @@ export default function ProductItem(props) {
                             alt=""
                         />
                         {/* {result.data.map((elm, id) => <img src={elm.img_url} className="secondary-img" alt=""/> )} */}
-                    </a>
+                    </Link>
                     <div className="product-action text-center" onClick={sendCard}>
                         <a href="#" title="Shoppingb Cart">
                             <i className="fas fa-shopping-cart" />
                         </a>
-                        <a href="#" title="Quick View">
+                        {/* <a href="#" title="Quick View"> */}
+                        <Link to={`/detail/${props.product_id}`}> 
                             <i className="fas fa-search" />
-                        </a>
+                        </Link>    
+                        {/* </a> */}
                     </div>
                     <div className="sale-tag">
                         <span className="sale">sale</span>

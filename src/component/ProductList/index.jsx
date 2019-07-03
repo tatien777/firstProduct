@@ -1,4 +1,4 @@
-import React , { useState }from "react";
+import React, { useState }from "react";
 // import result from './data';
 import ProductItem from '../ProductItem';
 import result from '../../data.json';
@@ -7,36 +7,44 @@ import result from '../../data.json';
 export default function ProductList(propApp) {
   // console.log(propApp) ;
   // const {data} =propApp.data ;
-  const sendSortData = () => {
-    
-  }
-
+  
+  
   const sortAToZ= () => {
-    let sortList =  propApp.data
-    console.log('button click',sortList);
-    propApp.sortProduct(true,'name',sortList);
-  }
+    // let sortList =  propApp.data
+    // console.log('test proApp.data', propApp.data);
+    // console.log('button click',sortList);
+    // propApp.sortProduct(true,'name',sortList);
+    console.log(propApp.sortProduct)
+    
+      propApp.sortProduct(true, "number", 'e');
+    
 
+  }
+  
   const sortZtoA= () => {
-    let sortList =  propApp.data
-    console.log('button click',sortList);
-    propApp.sortProduct(false,'name',sortList);
+    // let sortList =  propApp.data
+    // console.log('button click',sortList);
+    // propApp.sortProduct(false,'name',sortList);
   }
   const sortPriceUp= () => {
-    let sortList =  propApp.data
-    console.log('button click',sortList);
-    propApp.sortProduct(true,'final_price',sortList);
+    // let sortList =  propApp.data
+    // console.log('button click',sortList);
+    // propApp.sortProduct(true,'final_price',sortList);
   }
   const sortPriceDown= () => {
-    let sortList =  propApp.data
-    console.log('button click',sortList);
-    propApp.sortProduct(false,'final_price',);
+    // let sortList =  propApp.data
+    // console.log('button click',sortList);
+    // propApp.sortProduct(false,'final_price',);
   }
 
   const filterSale= () => {
     let number = 50;
-    propApp.filterBigSaleProduct(propApp.data,number);
+    console.log(propApp.data)
+    // propApp.filterBigSaleProduct(propApp.data, number);
   }
+
+  console.log(">>>>", propApp.data)
+  
   return (
     <main>
       <section className="shop-area pt-150 pb-100">
@@ -64,7 +72,7 @@ export default function ProductList(propApp) {
                     {/* <!-- ProductItem --> */}
                     
                     
-                    {propApp.data.map((elm,index) => <ProductItem {...elm} key={index} {...propApp} />)}
+                    { propApp.data.map((elm,index) => <ProductItem {...elm} key={index} {...propApp} />)}
                     
                     {/* <ProductItem/>
                     
@@ -112,7 +120,7 @@ export default function ProductList(propApp) {
                       <a onClick={sortPriceUp} href="#">Price: Low to High</a>
                     </li>
                     <li>
-                      <a href="#">Product: Top Sales</a>
+                      <a onClick={propApp.filterSale} href="#">Product: Top Sales</a>
                     </li>
                   </ul>
                 </div>

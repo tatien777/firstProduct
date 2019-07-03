@@ -1,10 +1,17 @@
 import React from 'react';
 import CartHeader from './cart';
+// import ReactDOM from 'react-dom';
+import { BrowserRouter as Router, Route, Switch,Link } from 'react-router-dom';
+import RegisterForm from '../RegisterForm';
+import LoginForm from '../LoginForm';
+// import ProducList from '../ProductList';
 
 export default function Header(props) {
   console.log(props.thePrice,'test header');
     return (
-        <header>
+        // <header>
+       
+        
         <div id="header-sticky" className="header-area box-90 sticky-header" >
         <div className="container-fluid" >
         <div className="row align-items-center" >
@@ -31,22 +38,30 @@ export default function Header(props) {
             <nav id="mobile-menu" style= {{display: 'block'}}>
               <ul>
                 <li>
-                  <a href="./index.html">Home</a>
+                <Link to={`./`}>Home</Link>
+                  {/* <a href="./index.html">Home</a> */}
                 </li>
                 <li>
                   <a href="#">Pages</a>
                   <ul className="submenu">
                     <li>
-                      <a href="./detail.html">Product Detail</a>
+                    <Link to={`./detail`}>Product Detail</Link>
+                      {/* <a href="./detail.html">Product Detail</a> */}
                     </li>
                     <li>
-                      <a href="./login.html">login</a>
+                    {/* <Route path="./login" component={LoginForm} /> */}
+                    
+                    <Link to={`./login`}>login</Link>
+                      {/* <a href="./login.html">login</a> */}
                     </li>
                     <li>
-                      <a href="./register.html">Register</a>
+                    <Link to={`./register`}>Register</Link>
+                    
+                      {/* <a href="./register.html">Register</a> */}
                     </li>
                     <li>
-                      <a href="./cart.html">Shoping Cart</a>
+                    <Link to={`./shooping`}>Shoping</Link>
+                      {/* <a href="./cart.html">Shoping Cart</a> */}
                     </li>
                   </ul>
                 </li>
@@ -61,8 +76,7 @@ export default function Header(props) {
       </div>
     </div>
     </div >
-</header >
-    )
+    )    
     
 
 }
