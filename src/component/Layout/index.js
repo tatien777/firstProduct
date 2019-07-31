@@ -5,7 +5,7 @@ import Header from '../Header';
 
 
 export default function Layout(props) { 
-   console.log(props.text,'test layout');
+   console.log(props,'test layout');
     return(
         <>
             <Header {...props}/>

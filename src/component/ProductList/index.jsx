@@ -1,40 +1,34 @@
 import React, { useState }from "react";
 // import result from './data';
 import ProductItem from '../ProductItem';
-import result from '../../data.json';
+// import result from '../../data.json';
 
 
 export default function ProductList(propApp) {
-  // console.log(propApp) ;
+  // console.log(propApp,"propsList") ;
   // const {data} =propApp.data ;
   
   
   const sortAToZ= () => {
-    // let sortList =  propApp.data
-    // console.log('test proApp.data', propApp.data);
-    // console.log('button click',sortList);
-    // propApp.sortProduct(true,'name',sortList);
-    console.log(propApp.sortProduct)
-    
-      propApp.sortProduct(true, "number", 'e');
-    
-
+    let sortList =  propApp.data;
+    console.log('button click',sortList);
+    return propApp.sortProduct(true,'name',sortList);
   }
   
   const sortZtoA= () => {
-    // let sortList =  propApp.data
-    // console.log('button click',sortList);
-    // propApp.sortProduct(false,'name',sortList);
+    let sortList =  propApp.data;
+    console.log('button click',sortList);
+    return propApp.sortProduct(false,'name',sortList);
   }
   const sortPriceUp= () => {
-    // let sortList =  propApp.data
-    // console.log('button click',sortList);
-    // propApp.sortProduct(true,'final_price',sortList);
+    let sortList =  propApp.data;
+    console.log('button click',sortList);
+    return propApp.sortProduct(true,'number',sortList);
   }
   const sortPriceDown= () => {
-    // let sortList =  propApp.data
-    // console.log('button click',sortList);
-    // propApp.sortProduct(false,'final_price',);
+    let sortList =  propApp.data;
+    console.log('button click',sortList);
+    return propApp.sortProduct(false,'number',sortList);
   }
 
   const filterSale= () => {
@@ -42,8 +36,8 @@ export default function ProductList(propApp) {
     console.log(propApp.data)
     // propApp.filterBigSaleProduct(propApp.data, number);
   }
-
-  console.log(">>>>", propApp.data)
+ 
+  // console.log(">>>>", propApp.data)
   
   return (
     <main>

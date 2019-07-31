@@ -1,23 +1,40 @@
-const REGISTER_REQUEST = 'REGISTER_REQUEST'
-const REGISTER_SUCCESS =  'REGISTER_SUCCESS'
-const REGISTER_FAIL = 'REGISTER_FAIL'
+import * as firebase from 'firebase';
+
+export const REGISTER_REQUEST = 'REGISTER_REQUEST'
+export const REGISTER_SUCCESS =  'REGISTER_SUCCESS'
+export const REGISTER_FAILURE = 'REGISTER_FAIL'
+
 // action creator
-function registerRequestAction() {
+export function registerRequestAction() {
     return{
         type: REGISTER_REQUEST
     }
 }
 
-function registerucessAction(result) {
+export function registerSucessAction(result) {
     return {
-        type: REGISTER_REQUEST,
+        type: REGISTER_SUCCESS,
         payload: result
     }
 }
 
-function registerSucessAction(error) {
+export function registerFailAction(error) {
     return {
-        type: REGISTER_FAIL,
+        type: REGISTER_FAILURE,
         error
+    }
+}
+
+export function register(email, password) {
+    return async(dispatch) => {
+        dispatch(registerRequestAction())
+        try {
+            const result = await firebase.auth().createUserWithEmailAndPassword(email, password)
+            console.log("register.action", result)
+            dispatch(registerSucessAction(result))
+        } catch (error) {
+            dispatch(registerFailAction(error.message))
+            console.log(error.message,"error.message")
+        }
     }
 }

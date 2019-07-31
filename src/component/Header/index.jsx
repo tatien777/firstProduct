@@ -7,7 +7,7 @@ import LoginForm from '../LoginForm';
 // import ProducList from '../ProductList';
 
 export default function Header(props) {
-  console.log(props.thePrice,'test header');
+  // console.log(props.thePrice,'test header');
     return (
         // <header>
        
@@ -37,6 +37,7 @@ export default function Header(props) {
           <div className="main-menu text-center">
             <nav id="mobile-menu" style= {{display: 'block'}}>
               <ul>
+             
                 <li>
                 <Link to={`./`}>Home</Link>
                   {/* <a href="./index.html">Home</a> */}

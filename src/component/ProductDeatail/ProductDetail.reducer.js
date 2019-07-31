@@ -1,23 +1,24 @@
+import { PRODUCT_DETAIL_REQUEST, PRODUCT_DETAIL_SUCCESS, PRODUCT_DETAIL_FAIL } from './ProductDetail.action'
+
 const instialState = {
     result: null,
     load: false,
     fail: null
 }
 export default function ProductDetailReducer(state=instialState,action){
-    switch(action,type){
-        case GET_PRODUCTS_REQUEST:
+    switch(action.type){
+        case PRODUCT_DETAIL_REQUEST:
             return Object.assign({},state,{
-                load:false,
-                result:action.payload
+                load:true
             })
    
-        case GET_PRODUCTS_SUCCESS:
-            return Object.assign({},stae,{
+        case PRODUCT_DETAIL_SUCCESS:
+            return Object.assign({},state,{
             load: false,
             result: action.payload
         })
-        case GET_PRODUCTS_FAIL:
-            return Object.assign({},stae,{
+        case PRODUCT_DETAIL_FAIL:
+            return Object.assign({},state,{
             load: false,
             result: action.error
         })

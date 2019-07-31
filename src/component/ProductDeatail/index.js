@@ -1,9 +1,14 @@
 import React,{useEffect} from 'react';
 
 export default function itemDetail(props) {
-    console.log(props);
+    console.log(props.selectItems,'selectItems');
     // console.log(props.match.params.id);
-    const returnId = () => {props.getInfoFromDetails(props.match.params.id)}
+    
+    const returnId = () => {
+        // console.log('true',props.match.params.id)
+        props.getInfoFromDetails(props.match.params.id)
+      }
+
     return (
         <>
             <main>
@@ -34,7 +39,7 @@ export default function itemDetail(props) {
                                         <div className="tab-pane fade show active" id="home" role="tabpanel">
                                             <div className="product-large-img">
                                                 <img src="img/product/pro1.jpg" alt="" />
-                                                {/* <img src={props.selectItem.img_url} alt="" /> */}
+                                                <img src={props.img_url} alt="" />
                                             </div>
                                         </div>
                                         <div className="tab-pane fade" id="profile" role="tabpanel">
@@ -179,7 +184,7 @@ export default function itemDetail(props) {
                                                     <div className="your-rating mb-40">
                                                         <span>Your Rating:</span>
                                                         <div className="rating-list">
-                                                            <a href="_blank">
+                                                            <a href="_blank" >
                                                                 <i className="far fa-star" />
                                                             </a>
                                                             <a href="_blank">

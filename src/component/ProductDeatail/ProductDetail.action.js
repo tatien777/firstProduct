@@ -15,9 +15,10 @@ function detailSucessAction(result) {
     }
 }
 
-function detailSucessAction(error) {
+function detailFailAction(error) {
     return {
         type: PRODUCT_DETAIL_FAIL,
         error
     }
 }
+// store.dispath(detailSucessAction);

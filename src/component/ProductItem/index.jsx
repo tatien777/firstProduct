@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route, Switch,Link } from 'react-router-dom';
 // var data = result.data;
 
 export default function ProductItem(props) {
-    const {name,img_url,shop_name,price,final_price} = props;
+    const {name,img_url,shop_name,price,final_price,product_id} = props;
     // const {addCard} = propApp;
     // const value = useContext(AppConText);
     
@@ -22,9 +22,15 @@ export default function ProductItem(props) {
         let URL =  {img_url};
         let thePrice = {price} ;
         let theFinalPrice = {final_price};
-        props.addCart(text, URL, thePrice, theFinalPrice);
+        let productId = {product_id}
+        props.addCart(text, URL, thePrice, theFinalPrice,productId);
     };
 
+    const returnDetailProduct = () => {
+        // console.log('returnDetailProduct',product_id)
+        props.getInfoFromDetails(product_id);
+        console.log(props.selectItem,'console.log(props.selectItem)')
+      }
 
 
     // const 
@@ -52,7 +58,7 @@ export default function ProductItem(props) {
                             <i className="fas fa-shopping-cart" />
                         </a>
                         {/* <a href="#" title="Quick View"> */}
-                        <Link to={`/detail/${props.product_id}`}> 
+                        <Link onClick={returnDetailProduct} to={`/detail/${props.product_id}`}> 
                             <i className="fas fa-search" />
                         </Link>    
                         {/* </a> */}

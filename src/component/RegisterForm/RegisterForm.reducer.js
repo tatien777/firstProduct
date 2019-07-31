@@ -1,23 +1,25 @@
+import { REGISTER_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS } from './RegisterForm.action'
+
+
 const instialState = {
     result: null,
     load: false,
     fail: null
 }
 export default function RegisterReducer(state=instialState,action){
-    switch(action,type){
-        case GET_PRODUCTS_REQUEST:
+    switch(action.type){
+        case REGISTER_FAILURE:
             return Object.assign({},state,{
-                load:false,
-                result:action.payload
+                load:true
             })
    
-        case GET_PRODUCTS_SUCCESS:
-            return Object.assign({},stae,{
+        case REGISTER_REQUEST:
+            return Object.assign({},state,{
             load: false,
             result: action.payload
         })
-        case GET_PRODUCTS_FAIL:
-            return Object.assign({},stae,{
+        case REGISTER_SUCCESS:
+            return Object.assign({},state,{
             load: false,
             result: action.error
         })
@@ -25,3 +27,5 @@ export default function RegisterReducer(state=instialState,action){
             return state
     }
 }
+
+
