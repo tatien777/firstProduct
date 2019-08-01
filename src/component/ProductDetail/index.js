@@ -1,14 +1,29 @@
-import React,{useEffect} from 'react';
+import React, { useState,useEffect } from "react";
 
-export default function itemDetail(props) {
-    console.log(props.selectItems,'selectItems');
+
+
+export default function ItemDetail(props) {
+    // console.log(props.selectItems,'selectItems');
     // console.log(props.match.params.id);
     
+    // useEffect(() => {
+    //     props.getInfoFromDetails(props.match.params.id)
+    // }, [])
+
+    useEffect(() => {
+        // scroll to top for each times when we access to detail [age]
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }, [])
+  
+    const {selectItem} = props;
     const returnId = () => {
         // console.log('true',props.match.params.id)
         props.getInfoFromDetails(props.match.params.id)
       }
-
+      console.log(props,'props productdetails')
     return (
         <>
             <main>
@@ -38,8 +53,8 @@ export default function itemDetail(props) {
                                     <div className="tab-content" id="myTabContentpro">
                                         <div className="tab-pane fade show active" id="home" role="tabpanel">
                                             <div className="product-large-img">
-                                                <img src="img/product/pro1.jpg" alt="" />
-                                                <img src={props.img_url} alt="" />
+                                                {/* <img src="img/product/pro1.jpg" alt="" /> */}
+                                                <img className="img-fluid" src={selectItem.img_url} alt="" />
                                             </div>
                                         </div>
                                         <div className="tab-pane fade" id="profile" role="tabpanel">
@@ -71,14 +86,14 @@ export default function itemDetail(props) {
                             <div className="col-xl-6 col-lg-8">
                                 <div className="product-details mb-30 pl-30">
                                     <div className="details-cat mb-20">
-                                        <a href="_blank">decor,</a>
-                                        <a href="_blank">furniture</a>
+                                        <a href="_blank">{selectItem.shop_name}</a>
+                                        <a href="_blank"></a>
                                     </div>
-                                    <h2 className="pro-details-title mb-15">Limonda Women Winter Cloth</h2>
+                                    <h2 className="pro-details-title mb-15">{selectItem.name}</h2>
                                     {/* <h2 className="pro-details-title mb-15">{props.selectItem.shop_name}</h2> */}
                                     <div className="details-price mb-20">
-                                        <span>$119.00</span>
-                                        <span className="old-price">$246.00</span>
+                                        <span>{selectItem.final_price}</span>
+                                        <span className="old-price">{selectItem.price}</span>
                                     </div>
                                     <div className="product-variant">
                                         <div className="product-desc variant-item">
@@ -124,15 +139,7 @@ export default function itemDetail(props) {
                                     <div className="tab-content" id="myTabContent2">
                                         <div className="tab-pane fade show active" id="home6" role="tabpanel" aria-labelledby="home-tab6">
                                             <div className="desc-text">
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                                                  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                                                  occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis
-                                                  unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab
-                          illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                                                <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui
-                                                  ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-                          adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+                          <p> {selectItem.description}</p> 
                                             </div>
                                         </div>
                                         <div className="tab-pane fade" id="profile6" role="tabpanel" aria-labelledby="profile-tab6">

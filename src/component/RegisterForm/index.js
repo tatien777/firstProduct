@@ -2,7 +2,7 @@ import React,{useState} from 'react' ;
 import Layout from '../Layout'
 import firebase from 'firebase';
 import PrivateRoute from '../PrivateRouter';
-import ProductDetail from '../ProductDeatail';
+// import ProductDetail from '../ProductDeatail';
 
 export default function RegisterForm(props) {
     console.log(props,"props Register");

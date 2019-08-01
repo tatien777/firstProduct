@@ -30,6 +30,7 @@ export default function ProductItem(props) {
         // console.log('returnDetailProduct',product_id)
         props.getInfoFromDetails(product_id);
         console.log(props.selectItem,'console.log(props.selectItem)')
+        // console.log("get info from details", props.getInfoFromDetails)
       }
 
 
@@ -58,6 +59,7 @@ export default function ProductItem(props) {
                             <i className="fas fa-shopping-cart" />
                         </a>
                         {/* <a href="#" title="Quick View"> */}
+                        {/* <Link to={`product-detail/${props.product_id}`}><i className="fas fa-search"></i></Link>    */}
                         <Link onClick={returnDetailProduct} to={`/detail/${props.product_id}`}> 
                             <i className="fas fa-search" />
                         </Link>    

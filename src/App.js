@@ -2,7 +2,7 @@ import React, { useState,useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 // import 'bootstrap/dist/css/bootstrap.css';
-import result from "./data";
+// import result from "./data";
 import Header from "./component/Header";
 import Footer from "./component/Footer";
 // import ProductList from './component/ProductList';
@@ -24,7 +24,7 @@ const RegisterForm = React.lazy(() => import("./component/RegisterForm/RegisterC
 const LoginForm = React.lazy(() =>
   import("./component/LoginForm/LoginFormContainer")
 );
-const ProductDetail = React.lazy(() => import("./component/ProductDeatail"));
+const ProductDetail = React.lazy(() => import("./component/ProductDetail"));
 
 // function App() {
 //   };
@@ -78,9 +78,10 @@ function App() {
 
 
   const findSelectedItem = productId => {
-    const item = result.data.find(
+    const item = data.find(
       item => item.product_id === parseInt(productId, 10)
     );
+ 
     setSelectedItem(item);
   };
 
@@ -104,12 +105,12 @@ function App() {
     );
     setTotalIcon(cart.length);
   // setTotlaQuality   
-  itemInCart.push({...cart,so_luong:0})
        if (!itemInCart.length) {
-        setItemInCart(state => ([...state, { ...cart, so_luong: 0 }]))
+        setItemInCart(state => ([...state, { ...cart, so_luong: 1 }]))
         // itemInCart.push({ ...props, so_luong: 1 });
       } else {
-        const existProductInCart = itemInCart.find(product => product.product_id === props.product_id)
+        console.log(props.productId,'props.product_id')
+        const existProductInCart = itemInCart.find(product => product.product_id === props.productId)
         // Bị trùng sản phẩm trong giỏ hàng => cập nhật số lương
         if (existProductInCart) {
           const newCart = itemInCart.map(product => {
@@ -173,12 +174,13 @@ function App() {
   const [selectItem, setSelectItem] = useState([]);
   const getInfoFromDetails = value => {
     // return console.log(value,'getInfoFromDetails');
-    console.log('value get infor',value)
-    let item = []
+    console.log(value,'value')
+    console.log(data,'result')
+    let item = [];
     item = data.find(item => item.product_id === parseInt(value, 10));
     console.log(item,'item');
-    setSelectItem(item);
-     console.log(selectItem,'selectItem');
+    return setSelectItem(item);
+     
   };
 
 
@@ -197,7 +199,8 @@ function App() {
     totalIcon,
     getInfoFromDetails,totalQuanlity,productId
   };
-  console.log(itemInCart,'setItemInCart ')
+  console.log(itemInCart,'setItemInCart ');
+  console.log(selectItem,'selectItem');
   return (
     
     <Router>
@@ -207,7 +210,8 @@ function App() {
             <Route
               path="/"
               exact
-              render={() => <ProductList {...props}  filterSale={filterSale} />}
+              render={() => <ProductList {...props}  filterSale={filterSale} 
+              getInfoFromDetails={getInfoFromDetails}/>}
             />
             {/* <Route path="/details" component={ItemDetail} /> */}
             <Route path="/register" component={RegisterForm} />
@@ -221,7 +225,7 @@ function App() {
                   {...propsOfRouter}
                   selectItem={selectItem}
                   findSelectedItem={findSelectedItem}
-                  getInfoFromDetails={getInfoFromDetails}
+                  
                 />
               )}
             />

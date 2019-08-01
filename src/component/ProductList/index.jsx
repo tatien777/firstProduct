@@ -66,7 +66,8 @@ export default function ProductList(propApp) {
                     {/* <!-- ProductItem --> */}
                     
                     
-                    { propApp.data.map((elm,index) => <ProductItem {...elm} key={index} {...propApp} />)}
+                    { propApp.data.map((elm,index) => <ProductItem {...elm} key={index} {...propApp} 
+                    getInfoFromDetails={propApp.getInfoFromDetails}/>)}
                     
                     {/* <ProductItem/>
                     

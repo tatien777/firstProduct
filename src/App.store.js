@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import RegisterReducer from "./component/RegisterForm/RegisterForm.reducer";
 import LoginReducer from "./component/LoginForm/LoginForm.reducer";
 import ProductListReducer from "./component/ProductList/ProductList.reducer";
-import ProductDetailReducer from "./component/ProductDeatail/ProductDetail.reducer";
+import ProductDetailReducer from "./component/ProductDetail/ProductDetail.reducer";
 import thunk from 'redux-thunk';
 
 
