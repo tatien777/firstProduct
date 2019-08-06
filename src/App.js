@@ -45,7 +45,7 @@ function App() {
   const [URL, setURL] = useState("URL here");
   const [thePrice, setThePrice] = useState("Price here");
   const [theFinalPrice, setTheFinalPrice] = useState("Final Price here");
-  const [cart, setCartsArray] = useState([]);
+  const [cart, setCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalIcon, setTotalIcon] = useState(0);
   const [totalQuanlity,setTotalQuanlity] = useState(1);
@@ -98,7 +98,7 @@ function App() {
     setTheFinalPrice(theFinalPrice);
     setProductId(productId);
     // cart = {text,URL, thePrice,theFinalPrice};
-    cart.push({ text, URL, thePrice, theFinalPrice,productId });
+    cart.push({ text, URL, thePrice, theFinalPrice,productId, so_luong: 1  });
     // setTotalPrice(cart.forEach(elm => {elm.theFinalPrice}).reduce((a,b) => a+b))
     setTotalPrice(
       cart.map(elm => elm.theFinalPrice.final_price).reduce((a, b) => a + b)
@@ -106,27 +106,30 @@ function App() {
     setTotalIcon(cart.length);
   // setTotlaQuality   
        if (!itemInCart.length) {
-        setItemInCart(state => ([...state, { ...cart, so_luong: 1 }]))
+        setItemInCart(state => ([...state, cart]))
         // itemInCart.push({ ...props, so_luong: 1 });
       } else {
-        console.log(props.productId,'props.product_id')
-        const existProductInCart = itemInCart.find(product => product.product_id === props.productId)
+        console.log('else')
+        console.log(productId.product_id,'props.product_id',itemInCart)
+        const existProductInCart = itemInCart.find(product => product.productId.product_id === productId.product_id)
         // Bị trùng sản phẩm trong giỏ hàng => cập nhật số lương
-        if (existProductInCart) {
-          const newCart = itemInCart.map(product => {
-            if (product.product_id === props.product_id) {
-              return {
-                ...product,
-                so_luong: product.so_luong + 1
-              }
-            }
-            return product
-          })
-          setItemInCart(newCart)
-        } else {
-          // chưa có sản phẩm này trong giỏ hàng => thêm mới vào
-          setItemInCart(state => ([...state, { ...cart, so_luong: 1 }]))
-        }
+        console.log(existProductInCart,'existProductInCart')
+        // if (existProductInCart) {
+        //   const newCart = itemInCart.map(product => {
+        //     if (product.productId.product_id === productId.product_id) {
+        //       return {
+        //         ...product,
+        //         so_luong: product.so_luong + 1
+        //       }
+        //     }
+        //     return product
+        //   })
+        //   setItemInCart(newCart)
+        // } 
+        // else {
+        //   // chưa có sản phẩm này trong giỏ hàng => thêm mới vào
+        //   setItemInCart(state => ([...state, cart]))
+        // }
       }
     
   };
@@ -197,7 +200,7 @@ function App() {
     sortProduct,
     filterBigSaleProduct,
     totalIcon,
-    getInfoFromDetails,totalQuanlity,productId
+    getInfoFromDetails,totalQuanlity,productId,itemInCart
   };
   console.log(itemInCart,'setItemInCart ');
   console.log(selectItem,'selectItem');
